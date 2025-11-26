@@ -325,12 +325,12 @@ const CKVTributeApp = () => {
                   name='answer'
                   value={formData.answer}
                   onChange={handleInputChange}
-                  className={`p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
+                  className={`!border-none p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
                   style={{ lineHeight: '30px' }}
                   placeholder="Start typing your answer..."
                   aria-invalid={Boolean(errors.answer)}
                 />
-                {errors.answer && <p className="mt-2 text-sm text-red-600">{errors.answer}</p>}
+                {errors.answer && <p className="pl-6 mt-2 text-sm text-red-600">{errors.answer}</p>}
               </div>
             </div>
 
