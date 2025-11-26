@@ -451,23 +451,23 @@ const CKVTributeApp = () => {
         {/* Preview Card */}
         <div
           ref={previewRef}
-          className="p-12 pt-5 relative overflow-hidden bg-[url('/src/assets/bg-img.webp')] bg-cover"
+          className="md:p-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/bg-img.webp')] bg-cover"
         >
 
 
           <div className="relative z-10">
             {/* From field */}
-            <div className="text-right mb-8">
+            <div className="text-right md:mb-8 mb-2">
               <span className="sloop text-[50px] text-[#BB9472] font-[400]">From </span>
               <span className="text-center min-w-[150px] text-[19px] text-[#464646] italic border-dashed border-b-1 border-[#464646] inline-block mt-[-2px]">
                 {formData.fullName || ' '}
               </span>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 md:gap-8 gap-4">
               {/* Image */}
               <div className="flex items-center justify-center">
-                <div className="w-[350px] aspect-square bg-white overflow-hidden ">
+                <div className="md:w-[350px] w-full aspect-square bg-white overflow-hidden ">
                   {formData.imagePreview ? (
                     <img src={formData.imagePreview} alt="Memory" className="w-full h-full object-cover" />
                   ) : (
