@@ -43,6 +43,8 @@ const ButtonLoader = ({ label }) => (
   </span>
 );
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const CKVTributeApp = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(initialFormState);
@@ -94,15 +96,18 @@ const CKVTributeApp = () => {
       newErrors.experience = 'Please select an experience.';
     }
 
-    if (!formData.answer || formData.answer.trim().length < 40) {
+    const answerText = formData.answer?.trim() || '';
+    if (!answerText || answerText.length < 40) {
       newErrors.answer = 'Share at least 40 characters to bring the story to life.';
     }
 
-    if (!formData.fullName || formData.fullName.trim().length < 3) {
+    const fullName = formData.fullName?.trim() || '';
+    if (!fullName || fullName.length < 3) {
       newErrors.fullName = 'Please enter your full name (minimum 3 characters).';
     }
 
-    if (!formData.department || formData.department.trim().length < 2) {
+    const department = formData.department?.trim() || '';
+    if (!department || department.length < 2) {
       newErrors.department = 'Please enter a valid department.';
     }
 
@@ -129,7 +134,7 @@ const CKVTributeApp = () => {
     try {
       setIsSubmitting(true);
       setStatus({ type: 'pending', message: 'Submitting your tribute...' });
-      const response = await fetch('http://localhost:5000/api/submit-tribute', {
+      const response = await fetch(`${API_BASE_URL}/api/submit-tribute`, {
         method: 'POST',
         body: submitData
       });
@@ -157,13 +162,17 @@ const CKVTributeApp = () => {
     if (!element) return;
 
     const normalizedFullName = formData.fullName?.trim() || '';
-    const safeName = normalizedFullName ? normalizedFullName.replace(/\s+/g, '-') : 'tribute';
+    if (!normalizedFullName) {
+      setStatus({ type: 'error', message: 'Please add your full name before downloading the preview.' });
+      return;
+    }
+    const safeName = normalizedFullName.replace(/\s+/g, '-');
 
     const persistPreview = async (blob, fileName) => {
       const imageData = new FormData();
       imageData.append('image', blob, fileName);
       imageData.append('fullName', normalizedFullName);
-      const response = await fetch('http://localhost:5000/api/save-preview-image', {
+      const response = await fetch(`${API_BASE_URL}/api/save-preview-image`, {
         method: 'POST',
         body: imageData
       });
@@ -316,12 +325,12 @@ const CKVTributeApp = () => {
                   name='answer'
                   value={formData.answer}
                   onChange={handleInputChange}
-                  className={`!border-none p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
+                  className={`p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
                   style={{ lineHeight: '30px' }}
                   placeholder="Start typing your answer..."
                   aria-invalid={Boolean(errors.answer)}
                 />
-                {errors.answer && <p className="pl-6 mt-2 text-sm text-red-600">{errors.answer}</p>}
+                {errors.answer && <p className="mt-2 text-sm text-red-600">{errors.answer}</p>}
               </div>
             </div>
 
