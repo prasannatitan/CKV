@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@font-face {
+  font-family: 'sloop';
+  src: url('./assets/fonts/Sloop-ScriptThree.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.sloop{
+     font-family: 'sloop', cursive;
+}
+body{
+     font-family: "EB Garamond", serif;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
