@@ -1,12 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
-import bgTexture from '../assets/bg-img.webp';
-import ckvHero from '../assets/ckv.webp';
-import handwritingGuide from '../assets/text.png';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || window.location.origin;
-const SUBMIT_ENDPOINT = `${API_BASE_URL}/api/submit-tribute`;
-const SAVE_PREVIEW_ENDPOINT = `${API_BASE_URL}/api/save-preview-image`;
 
 const EXPERIENCE_OPTIONS = [
   "A moment you may not remember, but I'll never forget",
@@ -101,18 +94,15 @@ const CKVTributeApp = () => {
       newErrors.experience = 'Please select an experience.';
     }
 
-    const answerText = formData.answer?.trim() || '';
-    if (!answerText || answerText.length < 40) {
+    if (!formData.answer || formData.answer.trim().length < 40) {
       newErrors.answer = 'Share at least 40 characters to bring the story to life.';
     }
 
-    const fullName = formData.fullName?.trim() || '';
-    if (!fullName || fullName.length < 3) {
+    if (!formData.fullName || formData.fullName.trim().length < 3) {
       newErrors.fullName = 'Please enter your full name (minimum 3 characters).';
     }
 
-    const department = formData.department?.trim() || '';
-    if (!department || department.length < 2) {
+    if (!formData.department || formData.department.trim().length < 2) {
       newErrors.department = 'Please enter a valid department.';
     }
 
@@ -139,7 +129,7 @@ const CKVTributeApp = () => {
     try {
       setIsSubmitting(true);
       setStatus({ type: 'pending', message: 'Submitting your tribute...' });
-      const response = await fetch(SUBMIT_ENDPOINT, {
+      const response = await fetch('http://localhost:5000/api/submit-tribute', {
         method: 'POST',
         body: submitData
       });
@@ -167,17 +157,13 @@ const CKVTributeApp = () => {
     if (!element) return;
 
     const normalizedFullName = formData.fullName?.trim() || '';
-    if (!normalizedFullName) {
-      setStatus({ type: 'error', message: 'Please add your full name before downloading the preview.' });
-      return;
-    }
-    const safeName = normalizedFullName.replace(/\s+/g, '-');
+    const safeName = normalizedFullName ? normalizedFullName.replace(/\s+/g, '-') : 'tribute';
 
     const persistPreview = async (blob, fileName) => {
       const imageData = new FormData();
       imageData.append('image', blob, fileName);
       imageData.append('fullName', normalizedFullName);
-      const response = await fetch(SAVE_PREVIEW_ENDPOINT, {
+      const response = await fetch('http://localhost:5000/api/save-preview-image', {
         method: 'POST',
         body: imageData
       });
@@ -272,10 +258,7 @@ const CKVTributeApp = () => {
         <div className="max-w-6xl mx-auto flex flex-col gap-6">
           {/* Header */}
           <div className="bg-[#EFE4DE] rounded-[14px] flex items-center justify-between">
-            <div
-              className="flex-1 w-full h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center "
-              style={{ backgroundImage: `url(${ckvHero})` }}
-            >
+            <div className="flex-1 w-full bg-[url(/src/assets/ckv.webp)] h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center ">
               <h1 className="[-webkit-text-stroke:_1px_#464646] md:text-4xl text-[25px] max-md:max-w-[150px] text-transparent mb-4 font-extrabold max-md:leading-[30px] max-md:pl-5">
                 Bring Your Moments with CKV
               </h1>
@@ -333,12 +316,12 @@ const CKVTributeApp = () => {
                   name='answer'
                   value={formData.answer}
                   onChange={handleInputChange}
-                  className={`p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
+                  className={`!border-none p-6 pt-8 w-full h-60 bg-transparent relative z-10 resize-none focus:outline-none text-[#464646] md:text-[16px] text-[14px] font-[400] leading-10 ${errors.answer ? 'border border-red-400 rounded-[14px]' : ''}`}
                   style={{ lineHeight: '30px' }}
                   placeholder="Start typing your answer..."
                   aria-invalid={Boolean(errors.answer)}
                 />
-                {errors.answer && <p className="mt-2 text-sm text-red-600">{errors.answer}</p>}
+                {errors.answer && <p className="pl-6 mt-2 text-sm text-red-600">{errors.answer}</p>}
               </div>
             </div>
 
@@ -459,8 +442,7 @@ const CKVTributeApp = () => {
         {/* Preview Card */}
         <div
           ref={previewRef}
-          className="p-12 pt-5 relative overflow-hidden bg-cover"
-          style={{ backgroundImage: `url(${bgTexture})` }}
+          className="p-12 pt-5 relative overflow-hidden bg-[url('/src/assets/bg-img.webp')] bg-cover"
         >
 
 
@@ -495,7 +477,7 @@ const CKVTributeApp = () => {
 
               {/* Text Content */}
               <div className='mt-4'>
-                <img src={handwritingGuide} alt="Handwritten note lines" />
+                <img src="/src/assets/text.png" alt="" />
                 <div className="relative mt-2 max-w-[340px] mx-auto">
                   <p className="absolute top-0 pt-1 text-[20px] text-[#464646] italic leading-[10px]" style={{ lineHeight: '30px' }}>
                     {formData.answer || 'text will come here'}
