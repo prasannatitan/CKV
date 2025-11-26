@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const SUBMIT_ENDPOINT = `${API_BASE_URL}/api/submit-tribute`;
+const SAVE_PREVIEW_ENDPOINT = `${API_BASE_URL}/api/save-preview-image`;
+
 const EXPERIENCE_OPTIONS = [
   "A moment you may not remember, but I'll never forget",
   "A lesson that changed my perspective",
@@ -132,7 +136,7 @@ const CKVTributeApp = () => {
     try {
       setIsSubmitting(true);
       setStatus({ type: 'pending', message: 'Submitting your tribute...' });
-      const response = await fetch('http://localhost:5000/api/submit-tribute', {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: 'POST',
         body: submitData
       });
@@ -170,7 +174,7 @@ const CKVTributeApp = () => {
       const imageData = new FormData();
       imageData.append('image', blob, fileName);
       imageData.append('fullName', normalizedFullName);
-      const response = await fetch('http://localhost:5000/api/save-preview-image', {
+      const response = await fetch(SAVE_PREVIEW_ENDPOINT, {
         method: 'POST',
         body: imageData
       });
