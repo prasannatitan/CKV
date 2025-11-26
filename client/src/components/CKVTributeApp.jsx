@@ -484,7 +484,7 @@ const CKVTributeApp = () => {
 
               {/* Text Content */}
               <div className='mt-4'>
-                <img src="/src/assets/text.png" alt="" />
+                <img src="src/assets/text.png" alt="" />
                 <div className="relative mt-2 max-w-[340px] mx-auto">
                   <p className="absolute top-0 pt-1 text-[20px] text-[#464646] italic leading-[10px]" style={{ lineHeight: '30px' }}>
                     {formData.answer || 'text will come here'}
