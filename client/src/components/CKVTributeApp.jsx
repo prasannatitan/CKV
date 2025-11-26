@@ -133,7 +133,7 @@ const CKVTributeApp = () => {
 
     try {
       setIsSubmitting(true);
-      setStatus({ type: 'pending', message: 'Submitting your tribute...' });
+      setStatus({ type: 'pending', message: 'Submitting your details...' });
       const response = await fetch(`${API_BASE_URL}/api/submit-tribute`, {
         method: 'POST',
         body: submitData
@@ -143,11 +143,11 @@ const CKVTributeApp = () => {
 
       if (!response.ok) {
         setErrors(prev => ({ ...prev, ...(data?.errors || {}) }));
-        setStatus({ type: 'error', message: data?.message || 'Unable to submit tribute. Please try again.' });
+        setStatus({ type: 'error', message: data?.message || 'Unable to submit your details. Please try again.' });
         return;
       }
 
-      setStatus({ type: 'success', message: 'Tribute submitted! Preview your card below.' });
+      setStatus({ type: 'success', message: 'details submitted! Preview your card below.' });
       setStep(2);
     } catch (error) {
       console.error('Error submitting:', error);
@@ -190,7 +190,7 @@ const CKVTributeApp = () => {
       if (window.domtoimage) {
         const dataUrl = await window.domtoimage.toPng(element, { quality: 1 });
         const link = document.createElement('a');
-        link.download = `tribute-${safeName}.png`;
+        link.download = `pre-${safeName}.png`;
         link.href = dataUrl;
         link.click();
 
@@ -239,7 +239,7 @@ const CKVTributeApp = () => {
         document.body.removeChild(clone);
 
         const link = document.createElement('a');
-        link.download = `tribute-${safeName}.png`;
+        link.download = `pre-${safeName}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
 
