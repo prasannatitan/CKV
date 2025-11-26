@@ -185,9 +185,7 @@ const CKVTributeApp = () => {
     try {
       setIsDownloading(true);
       setStatus({ type: 'pending', message: 'Preparing your preview image...' });
-      element.style.backgroundSize = "cover";
-      element.style.backgroundRepeat = "no-repeat";
-      element.style.backgroundPosition = "center";
+  
 
       if (window.domtoimage) {
         const dataUrl = await window.domtoimage.toPng(element, { quality: 1 });
