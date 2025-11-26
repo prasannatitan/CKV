@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import bgTexture from '../assets/bg-img.webp';
+import ckvHero from '../assets/ckv.webp';
+import handwritingGuide from '../assets/text.png';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || window.location.origin;
 const SUBMIT_ENDPOINT = `${API_BASE_URL}/api/submit-tribute`;
 const SAVE_PREVIEW_ENDPOINT = `${API_BASE_URL}/api/save-preview-image`;
 
@@ -269,7 +272,10 @@ const CKVTributeApp = () => {
         <div className="max-w-6xl mx-auto flex flex-col gap-6">
           {/* Header */}
           <div className="bg-[#EFE4DE] rounded-[14px] flex items-center justify-between">
-            <div className="flex-1 w-full bg-[url(/src/assets/ckv.webp)] h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center ">
+            <div
+              className="flex-1 w-full h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center "
+              style={{ backgroundImage: `url(${ckvHero})` }}
+            >
               <h1 className="[-webkit-text-stroke:_1px_#464646] md:text-4xl text-[25px] max-md:max-w-[150px] text-transparent mb-4 font-extrabold max-md:leading-[30px] max-md:pl-5">
                 Bring Your Moments with CKV
               </h1>
@@ -453,7 +459,8 @@ const CKVTributeApp = () => {
         {/* Preview Card */}
         <div
           ref={previewRef}
-          className="p-12 pt-5 relative overflow-hidden bg-[url('/src/assets/bg-img.webp')] bg-cover"
+          className="p-12 pt-5 relative overflow-hidden bg-cover"
+          style={{ backgroundImage: `url(${bgTexture})` }}
         >
 
 
@@ -488,7 +495,7 @@ const CKVTributeApp = () => {
 
               {/* Text Content */}
               <div className='mt-4'>
-                <img src="/src/assets/text.png" alt="" />
+                <img src={handwritingGuide} alt="Handwritten note lines" />
                 <div className="relative mt-2 max-w-[340px] mx-auto">
                   <p className="absolute top-0 pt-1 text-[20px] text-[#464646] italic leading-[10px]" style={{ lineHeight: '30px' }}>
                     {formData.answer || 'text will come here'}
