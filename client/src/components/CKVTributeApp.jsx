@@ -262,7 +262,7 @@ const CKVTributeApp = () => {
   if (step === 1) {
     return (
       <div className="min-h-screen py-12 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col gap-6">
+        <div className="max-w-6xl mx-auto flex flex-col gap-10">
           {/* Header */}
           <div className="bg-[#EFE4DE] rounded-[14px] flex items-center justify-between">
             <div className="flex-1 w-full bg-[url(/src/assets/ckv.webp)] h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center ">
@@ -276,8 +276,9 @@ const CKVTributeApp = () => {
 
           <div className="flex max-md:flex-col gap-8">
             {/* Left Column */}
-            <div className="flex flex-col gap-10 md:p-4">
-              <div>
+            <div className="flex flex-col gap-10 md:p-4 relative">
+              <img className='z-1 absolute top-[-16px] left-[-5px] w-[52px]' src="/src/assets/q1 (1).png" alt="" />
+              <div className='z-10 relative'>
                 <p className="text-[#464646] md:text-[20px] text-[17px] md:leading-[27px] leading-[24px]">
                   Please share a deep, genuine and emotionally honest reflection for him, something that captures his people-first leadership, sustainability mindset, humility, and real impact on you.... These prompts are crafted to evoke heartfelt responses, not corporate lines.
                 </p>
@@ -333,8 +334,9 @@ const CKVTributeApp = () => {
             </div>
 
             {/* Right Column */}
-            <div className="md:min-w-[400px] md:p-4 flex flex-col justify-between gap-8">
-              <div>
+            <div className="relative md:min-w-[400px] md:p-4 flex flex-col justify-between gap-8">
+               <img className='z-1 absolute top-[-14px] left-[-7px] w-[55px]' src="/src/assets/q1 (2).png" alt="" />
+              <div className='relative z-10'>
                 <p className="text-[#464646] md:text-[20px] text-[17px] md:leading-[27px] leading-[24px]">
                   Is there a memory with CKV that captures what he means to you? A place...a project or
                 </p>
