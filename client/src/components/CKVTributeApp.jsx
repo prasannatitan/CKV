@@ -277,7 +277,7 @@ const CKVTributeApp = () => {
           <div className="flex max-md:flex-col gap-8">
             {/* Left Column */}
             <div className="flex flex-col gap-10 md:p-4 relative">
-              <img className='z-1 absolute top-[-16px] left-[-5px] w-[52px]' src="/src/assets/q1.png" alt="" />
+              <img className='z-1 absolute top-[-16px] left-[-5px] w-[52px]' src="/assets/q1.png" alt="" />
               <div className='z-10 relative'>
                 <p className="text-[#464646] md:text-[20px] text-[17px] md:leading-[27px] leading-[24px]">
                   Please share a deep, genuine and emotionally honest reflection for him, something that captures his people-first leadership, sustainability mindset, humility, and real impact on you.... These prompts are crafted to evoke heartfelt responses, not corporate lines.
@@ -335,7 +335,7 @@ const CKVTributeApp = () => {
 
             {/* Right Column */}
             <div className="relative md:min-w-[400px] md:p-4 flex flex-col justify-between gap-8">
-               <img className='z-1 absolute top-[-14px] left-[-7px] w-[55px]' src="/src/assets/q2.png" alt="" />
+               <img className='z-1 absolute top-[-14px] left-[-7px] w-[55px]' src="assets/q2.png" alt="" />
               <div className='relative z-10'>
                 <p className="text-[#464646] md:text-[20px] text-[17px] md:leading-[27px] leading-[24px]">
                   Is there a memory with CKV that captures what he means to you? A place...a project or
