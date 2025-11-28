@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const EXPERIENCE_OPTIONS = [
-  "A moment you may not remember, but I'll never forget",
-  "A lesson that changed my perspective",
-  "When you showed true leadership",
-  "A project that made a difference"
+  "A belief or skill I carry forward thanks to you",
+  "A moment of support you offered when it was needed most",
+  "What we discovered together",
+  "One value I learnt from you",
+  "Type My own"
 ];
 
 const initialFormState = {
@@ -52,20 +53,37 @@ const CKVTributeApp = () => {
   const [status, setStatus] = useState({ type: 'idle', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [showCustomInput, setShowCustomInput] = useState(false);
   const previewRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    if (name === 'experience') {
+      const isCustomOption = value === 'Type My own';
+      setShowCustomInput(isCustomOption);
+      formData.experience = ""
+      if (!isCustomOption) {
+        setFormData(prev => ({ ...prev, [name]: value }));
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+    
     setErrors(prev => {
       if (!prev[name]) return prev;
       const next = { ...prev };
       delete next[name];
       return next;
     });
+    
     if (status.type === 'error') {
       setStatus({ type: 'idle', message: '' });
     }
+  };
+
+  const handleCustomInputChange = (e) => {
+    setFormData(prev => ({ ...prev, experience: e.target.value }));
   };
 
   const handleImageUpload = (e) => {
@@ -185,7 +203,6 @@ const CKVTributeApp = () => {
     try {
       setIsDownloading(true);
       setStatus({ type: 'pending', message: 'Preparing your preview image...' });
-  
 
       if (window.domtoimage) {
         const dataUrl = await window.domtoimage.toPng(element, { quality: 1 });
@@ -258,7 +275,6 @@ const CKVTributeApp = () => {
     }
   };
 
-
   if (step === 1) {
     return (
       <div className="min-h-screen py-12 px-4">
@@ -292,17 +308,32 @@ const CKVTributeApp = () => {
                 <div className="relative">
                   <select
                     name="experience"
-                    value={formData.experience}
+                    value={showCustomInput ? 'Type My own' : formData.experience}
                     onChange={handleInputChange}
                     className={`w-full px-6 py-2 border-2 rounded-full appearance-none bg-[rgba(239,228,222,0.4)] text-[#464646] md:text-[16px] text-[14px] font-[400] ${errors.experience ? 'border-red-400 focus:border-red-500' : 'border-[#464646] focus:border-[#BB9472] focus:ring-2 focus:ring-[#BB9472]/30'}`}
                     aria-invalid={Boolean(errors.experience)}
                   >
-                    <option value="">Select a prompt...</option>
+                    <option value="">Select a Experience...</option>
                     {EXPERIENCE_OPTIONS.map((exp) => (
                       <option key={exp} value={exp}>{exp}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                  <svg className="absolute right-6 top-6 -translate-y-1/2 text-gray-400" width="17" height="11" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.70767 9.70717C9.79366 9.62148 9.86562 9.52726 9.92874 9.42908L16.5179 2.8399C17.1604 2.19681 17.161 1.15426 16.5179 0.510867C15.8748 -0.131614 14.8326 -0.132224 14.1889 0.510867L8.51479 6.18556L2.81052 0.482204C2.16742 -0.160582 1.12518 -0.160887 0.481787 0.482204C0.160698 0.804208 -0.000608132 1.22531 1.72277e-06 1.64642C-0.000608132 2.06783 0.160698 2.48924 0.482397 2.81002L7.10023 9.42877C7.16335 9.52726 7.23593 9.62118 7.32253 9.70717C7.65124 10.0359 8.08362 10.1941 8.51479 10.1865C8.94535 10.1944 9.37895 10.0359 9.70767 9.70717Z" fill="#464646"/>
+</svg>
+
+                  {showCustomInput && (
+                    <div className="mt-4">
+                      <input
+                        type="text"
+                        value={formData.experience}
+                        onChange={handleCustomInputChange}
+                        placeholder="Enter your custom experience..."
+                        className="w-full px-6 py-2 border-2 rounded-full bg-[rgba(239,228,222,0.4)] text-[#464646] md:text-[16px] text-[14px] font-[400] border-[#464646] focus:border-[#BB9472] focus:ring-2 focus:ring-[#BB9472]/30"
+                      />
+                    </div>
+                  )}
+              
                 </div>
                 {errors.experience && <p className="mt-2 text-sm text-red-600">{errors.experience}</p>}
               </div>
