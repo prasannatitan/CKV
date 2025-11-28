@@ -4,6 +4,7 @@ import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'luci
 const EXPERIENCE_OPTIONS = [
   "A belief or skill I carry forward thanks to you",
   "A moment of support you offered when it was needed most",
+  "A moment you may not remember, but I’ll never forget",
   "What we discovered together",
   "One value I learnt from you",
   "Type My own"
@@ -482,11 +483,11 @@ const CKVTributeApp = () => {
         {/* Preview Card */}
         <div
           ref={previewRef}
-          className="md:p-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/pre-bg.png')] bg-cover"
+          className="bg-white"
         >
 
 
-          <div className="relative z-10">
+          <div className="relative z-10 md:p-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/pre-bg.png')] bg-cover">
             {/* From field */}
             <div className="text-right md:mb-8 mb-2">
               <span className="sloop text-[50px] text-[#BB9472] font-[400]">From </span>
