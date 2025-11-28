@@ -97,9 +97,7 @@ const validateTributePayload = ({ experience, answer, fullName, department }) =>
   const errors = {};
   if (!experience || !experience.trim()) {
     errors.experience = 'Please select an experience to continue.';
-  } else if (!ALLOWED_EXPERIENCES.includes(experience)) {
-    errors.experience = 'Please pick a valid experience option.';
-  }
+  } 
 
   if (!answer || !answer.trim()) {
     errors.answer = 'Please share your memory in the answer field.';
