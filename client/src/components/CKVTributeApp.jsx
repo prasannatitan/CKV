@@ -482,7 +482,7 @@ const CKVTributeApp = () => {
         {/* Preview Card */}
         <div
           ref={previewRef}
-          className="md:p-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/bg-img.webp')] bg-cover"
+          className="md:p-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/pre-bg.png')] bg-cover"
         >
 
 
