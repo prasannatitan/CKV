@@ -341,7 +341,7 @@ const CKVTributeApp = () => {
 
               {/* Answer Text Area */}
               <div className="relative">
-                <label className='absolute bg-white mt-[-13px] z-10 pr-1 text-[#464646] md:text-[18px] text-[16px] leading-[27px]'>Answer for Q1</label>
+                <label className='absolute bg-white mt-[-13px] z-10 pr-1 text-[#464646] md:text-[18px] text-[16px] leading-[27px]'>Your Experience</label>
                 <div className="absolute z-2 inset-0 pointer-events-none p-6 pt-0 border border-[#EFE4DE] rounded-[14px]">
                   {[...Array(8)].map((_, i) => (
                     <div
@@ -370,7 +370,7 @@ const CKVTributeApp = () => {
                <img className='z-1 absolute top-[-14px] left-[-7px] w-[55px]' src="assets/q2.png" alt="" />
               <div className='relative z-10'>
                 <p className="text-[#464646] md:text-[20px] text-[17px] md:leading-[27px] leading-[24px]">
-                  Is there a memory with CKV that captures what he means to you? A place...a project or
+                  Is there a memory with CKV that captures what he means to you?
                 </p>
               </div>
 
