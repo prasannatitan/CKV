@@ -171,7 +171,8 @@ const CKVTributeApp = () => {
       setStep(2);
     } catch (error) {
       console.error('Error submitting:', error);
-      setStatus({ type: 'error', message: 'Something went wrong while submitting. Please try again.' });
+      setStatus({ type: 'error', message: error});
+            // setStatus({ type: 'error', message: 'Something went wrong while submitting. Please try again.' });
     } finally {
       setIsSubmitting(false);
     }
