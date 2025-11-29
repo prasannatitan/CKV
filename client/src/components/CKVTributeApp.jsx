@@ -284,7 +284,7 @@ const CKVTributeApp = () => {
           <div className="bg-[#EFE4DE] rounded-[14px] flex items-center justify-between">
             <div className="flex-1 w-full bg-[url(/src/assets/ckv.webp)] h-[200px] bg-bottom-right bg-no-repeat bg-cover flex items-center md:justify-center ">
               <h1 className="[-webkit-text-stroke:_1px_#464646] md:text-4xl text-[25px] max-md:max-w-[150px] text-transparent mb-4 font-extrabold max-md:leading-[30px] max-md:pl-5">
-                Bring Your Moments with CKV
+                Memories You Share With CKV
               </h1>
             </div>
           </div>
