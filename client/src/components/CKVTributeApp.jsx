@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { ChevronDown, Paperclip, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import q1 from "../assets/q1.png"
 import q2 from "../assets/q2.png"
+import prebg from"../assets/pre-bg.png"
 const EXPERIENCE_OPTIONS = [
   "A belief or skill I carry forward thanks to you",
   "A moment of support you offered when it was needed most",
@@ -496,7 +497,8 @@ const CKVTributeApp = () => {
         >
 
 
-          <div className="relative z-10 md:p-12 md:pt-6 md:pb-12 pb-12 p-2 pt-5 relative overflow-hidden bg-[url('/src/assets/pre-bg.png')] bg-contain bg-no-repeat">
+          <div className="relative z-10 md:p-12 md:pt-6 md:pb-12 pb-12 p-2 pt-5 relative overflow-hidden bg-contain bg-no-repeat"
+            style={{ backgroundImage: `url(${prebg})` }}>
             {/* From field */}
             <div className="text-right md:mb-8 mb-2 relative" >
               <span className="sloop text-[50px] text-[#BB9472] font-[400]">From </span>
